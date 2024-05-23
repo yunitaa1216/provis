@@ -8,13 +8,12 @@ class AlreadyHaveAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      // verticalDirection: VerticalDirection.up,
       children: [
         const Text(
           "Sudah punya akun?",
           style: TextStyle(
             color: Color(0xFFF9F5F6),
-            fontSize: 12,
+            fontSize: 14,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.w500,
             height: 0,
@@ -33,7 +32,7 @@ class AlreadyHaveAccount extends StatelessWidget {
               'Masuk',
               style: TextStyle(
                 color: Color(0xFF3C96E9),
-                fontSize: 12,
+                fontSize: 14,
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,

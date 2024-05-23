@@ -68,9 +68,6 @@ class Welcome extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   borderColor: Color(0xFFFFFFFF),
                   borderWidth: 1,
-                  blur: 10,
-                  alignment: Alignment.center,
-                  frostedOpacity: 0.1,
                   color: Color(0xFF3C96E9),
                   child: MaterialButton(
                       onPressed: () {
@@ -87,7 +84,7 @@ class Welcome extends StatelessWidget {
                         color: Colors.white,
                         fontFamily:'Raleway',
                         fontWeight: FontWeight.w500,
-                        fontSize: 16),
+                        fontSize: 12),
                     ),
                   ),
                 ),

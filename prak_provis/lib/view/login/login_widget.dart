@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:prak_provis/model/login_model/model_login.dart';
 import 'package:prak_provis/view/register/register.dart';
 
+import '../../model/login_model/model_login.dart';
+import '../../model/utils/auth_service.dart';
+import '../../viewmodel/api_login/login_api.dart';
+// import '../../viewmodel/api_login/login_api.dart';
 
-//widget tidak punya akun
 class DonTHaveAnAccountSignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Row( 
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         const Text(
           "Belum punya akun?",
           style: TextStyle(
             color: Color(0xFFF9F5F6),
-            fontSize: 12,
+            fontSize: 14,
             fontFamily: 'Raleway',
             fontWeight: FontWeight.w500,
             height: 0,
@@ -33,7 +35,7 @@ class DonTHaveAnAccountSignUp extends StatelessWidget {
               'Daftar',
               style: TextStyle(
                 color: Color(0xFF3C96E9),
-                fontSize: 12,
+                fontSize: 14,
                 fontFamily: 'Raleway',
                 fontWeight: FontWeight.w500,
                 decoration: TextDecoration.underline,
@@ -55,6 +57,8 @@ class _LoginWidgetState extends State<LoginWidget> {
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = true; // Menentukan apakah password terlihat atau tidak
   String _massageError = '';
+
+  final LoginViewModel _loginViewModel = LoginViewModel();
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +193,6 @@ class _LoginWidgetState extends State<LoginWidget> {
                           ),
                           const SizedBox(height: 4),
                           Container(
-                            // width: double.infinity,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 10),
                             decoration: ShapeDecoration(
@@ -268,6 +271,29 @@ class _LoginWidgetState extends State<LoginWidget> {
                     borderRadius: BorderRadius.circular(100),
                   ),
                 ),
+                child: InkWell(
+                  onTap: () {
+                    String email = _emailController.text;
+                    String password = _passwordController.text;
+
+                    LoginData loginData =
+                        LoginData(email: email, password: password);
+                    _loginViewModel.loginUser(loginData).then((loginResponse) {
+                        if (loginResponse.sucess == true) {
+                        print('ke halaman homepage');
+                        AuthService.token = loginResponse.token;
+                        Navigator.pushReplacementNamed(context, "/homepage");
+                      } else {
+                        // Tampilkan pesan kesalahan jika login gagal
+                        setState(() {
+                          _massageError = 'salah';
+                        });
+                      }
+                    });
+                        // String token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NiwiZW1haWwiOiJzb3NvQGdtYWlsLmNvbSIsImlhdCI6MTcxMzc5OTc1Nn0.cqsYnhTquP1-9aul9LI-mId2doMeY03ZG0twA6DghSI';
+                        // Navigator.pushReplacementNamed(context, "/homepage");
+                        // AuthService.token = token;
+                  },
                 child: const Center(
                     child: Padding(
                       padding:
@@ -286,6 +312,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                     ),
                   ),
                 ),
+              )
             ],
           ),
         ),
