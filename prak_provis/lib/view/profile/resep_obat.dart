@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/widgets/bottom_navigation_bar.dart';
 
 class Recipe extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
+            color: Colors.black,
             onPressed: () {
               Navigator.pop(context); // Kembali ke halaman sebelumnya
             },
           ),
-          title: Text('Resep Obat'),
+          title: Text('Resep Obat', style: TextStyle(
+            color: Colors.black
+          ),),
           backgroundColor: Color(0xFFBEDCF2),
         ),
         body: Padding(
@@ -61,7 +66,7 @@ class Recipe extends StatelessWidget {
                               ),
                               SizedBox(width: 10.0),
                               Text(
-                                'Reski Dwi',
+                                '${AuthService.email}',
                                 style: TextStyle(
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,

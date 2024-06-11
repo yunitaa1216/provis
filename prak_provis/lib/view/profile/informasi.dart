@@ -1,21 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/profile/rekam_medis.dart';
 import 'package:prak_provis/view/profile/resep_obat.dart';
 
 class Information extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> bookingData = AuthService.getBookingData();
+    String? date = bookingData['date'];
+    String? time = bookingData['time'];
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
+          
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
+            color: Colors.black,
             onPressed: () {
               Navigator.pop(context); // Kembali ke halaman sebelumnya
             },
           ),
-          title: Text('Informasi'),
+          title: Text('Informasi', style: TextStyle(
+            color: Colors.black
+          ),),
           backgroundColor: Color(0xFFBEDCF2),
         ),
         body: Padding(
@@ -43,7 +53,7 @@ class Information extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 30,
-                              backgroundImage: AssetImage('assets/images/rekam_medis.png'),
+                              backgroundImage: AssetImage('assets/profil/1.png'),
                             ),
                             SizedBox(width: 16.0),
                             Text(
@@ -56,7 +66,7 @@ class Information extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Reski Dwi',
+                              '${AuthService.email}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
@@ -76,11 +86,11 @@ class Information extends StatelessWidget {
                           children: [
                             Icon(Icons.calendar_today),
                             SizedBox(width: 8.0),
-                            Text('09 September 2023'),
+                            Text(date ?? 'Tanggal tidak tersedia'),
                             Spacer(),
                             Icon(Icons.access_time),
                             SizedBox(width: 8.0),
-                            Text('09:00-11:00'),
+                            Text(time ?? 'Waktu tidak tersedia'),
                           ],
                         ),
                       ],
@@ -123,7 +133,7 @@ class Information extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              'Reski Dwi',
+                              '${AuthService.email}',
                               style: TextStyle(
                                 fontSize: 16.0,
                                 fontWeight: FontWeight.bold,
@@ -143,7 +153,7 @@ class Information extends StatelessWidget {
                           children: [
                             Icon(Icons.calendar_today),
                             SizedBox(width: 8.0),
-                            Text('09 September 2023'),
+                            Text(date ?? 'Tanggal tidak tersedia'),
                             Spacer(),
                             Icon(Icons.access_time),
                             SizedBox(width: 8.0),

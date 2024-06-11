@@ -1,11 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/profile/chatbot.dart';
 // import 'package:google_fonts/google_fonts.dart';
 import 'package:prak_provis/view/profile/informasi.dart';
 import 'package:prak_provis/view/profile/tentang_kami.dart';
+import 'package:prak_provis/view/profile/token.dart';
 import 'package:prak_provis/view/widgets/bottom_navigation_bar.dart';
 import 'package:prak_provis/view/widgets/navigation_service.dart';
+import 'package:prak_provis/viewmodel/api_profil/api_profil.dart';
+import 'package:prak_provis/viewmodel/api_profil/profil_viewmodel.dart';
 
 class CustomShapeClipper extends CustomClipper<Path> {
   @override
@@ -73,8 +77,29 @@ class ProfilPage extends StatefulWidget {
 class _ProfilPageState extends State<ProfilPage> {
   bool isNotificationEnabled = true;
   Color iconColor = Colors.grey;
+  // final ApiProfil _apiProfil = ApiProfil();
+  // Map<String, dynamic> _userProfile = {};
 
-  Map<String, dynamic> _userProfile = {};
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _fetchUserProfile();
+  // }
+
+  // Future<void> _fetchUserProfile() async {
+  //   try {
+  //     String email = AuthService.getEmail(); // Mendapatkan email dari AuthService
+  //     String password = AuthService.getPassword();
+      
+  //     final response = await _apiProfil.getUserProfile(email, password);
+  //     print('User Profile Response: $response'); // Debug print to check response structure
+  //     setState(() {
+  //       _userProfile = response; // Ensure you correctly set the response data
+  //     });
+  //   } catch (error) {
+  //     print('Error fetching user profile: $error');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,29 +113,34 @@ class _ProfilPageState extends State<ProfilPage> {
           children: [
             Padding(
               padding:
-                  const EdgeInsets.only(bottom: 10.0, right: 16.0, left: 60.0),
+                  const EdgeInsets.only(bottom: 10.0, right: 60.0, left: 40.0),
               child: Text(
                 'Profil',
                 style: TextStyle(
                     color: Colors.black,
-                    fontSize: 19.5,
+                    fontSize: 24.0,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
           ]
             ),
+            iconTheme: IconThemeData(color: Colors.black),
         actions: [
           IconButton(
             icon: Icon(Icons.notifications_none_outlined),
             color: Colors.black,
-            onPressed: () {},
+            onPressed: () {
+                Navigator.pushNamed(context, '/notifikasi');
+              },
           ),
         ],
       ),
-      body: SingleChildScrollView(
+      body: 
+      SingleChildScrollView(
         child: Column(
           children: <Widget>[
+            // TokenDisplayWidget(),
             ClipPath(
               clipper: CustomShapeClipper(),
               child: Container(
@@ -132,15 +162,14 @@ class _ProfilPageState extends State<ProfilPage> {
                       padding: EdgeInsets.only(top: 30),
                       child: CircleAvatar(
                         radius: 50,
-                        backgroundImage: AssetImage(
-                          _userProfile['profile_picture']?.toString() ??
-                              'assets/images/Ellipse.png',
-                        ),
+                        backgroundColor: Colors.grey,
+                        backgroundImage: AssetImage('assets/profil/1.png'),
                       ),
                     ),
                     SizedBox(height: 8),
                     Text(
-                      _userProfile['full_name'] ?? 'Reski Dwi',
+                      '${AuthService.email}',
+                      // _userProfile['email'] ?? 'User',
                       style: TextStyle(
                         fontSize: 18,
                         color: Colors.black,
@@ -197,15 +226,45 @@ class _ProfilPageState extends State<ProfilPage> {
                     padding: EdgeInsets.only(
                         top: 2.0, bottom: 2.0, right: 16.0, left: 16.0),
                     child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        buildOption(
-                            context, Icons.logout_outlined, 'Keluar', null, () {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, '/', (route) => false);
-                        }),
-                      ],
-                    ),
+  mainAxisSize: MainAxisSize.min,
+  children: [
+    buildOption(
+      context, 
+      Icons.logout_outlined, 
+      'Keluar', 
+      null, 
+      () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Konfirmasi"),
+              content: Text("Apakah Anda yakin ingin keluar?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text("Batal"),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Navigator.pushNamedAndRemoveUntil(
+                      context, 
+                      '/', 
+                      (route) => false
+                    );
+                  },
+                  child: Text("Keluar"),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    ),
+  ],
+),
                   ),
                 ),
               ],
@@ -220,7 +279,10 @@ class _ProfilPageState extends State<ProfilPage> {
       Navigator.pushNamed(context, '/homepage');
     } else if (index == 1) {
       Navigator.pushNamed(context, '/artikel');
-    } else if (index == 3) {
+    } else if (index == 2) {
+      Navigator.pushNamed(context, '/pilihandokter');
+    }
+    else if (index == 3) {
       Navigator.pushNamed(context, '/info');
     } else if (index == 4) {
       Navigator.pushNamed(context, '/profil');

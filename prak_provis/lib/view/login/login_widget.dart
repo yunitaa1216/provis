@@ -89,7 +89,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         height: 0,
                       ),
                     ),
-                    SizedBox(height: 6),
+                    SizedBox(height: 12),
                     const Text(
                       'Masukkan Email dan Password',
                       style: TextStyle(
@@ -100,7 +100,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         height: 0,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 16),
                     Container(
                       width: double.infinity,
                       height: 68,
@@ -279,11 +279,12 @@ class _LoginWidgetState extends State<LoginWidget> {
                     LoginData loginData =
                         LoginData(email: email, password: password);
                     _loginViewModel.loginUser(loginData).then((loginResponse) {
-                        if (loginResponse.sucess == true) {
+                        if (  loginResponse.success == true) {
                         print('ke halaman homepage');
                         AuthService.token = loginResponse.token;
                         Navigator.pushReplacementNamed(context, "/homepage");
-                      } else {
+                      } 
+                      else {
                         // Tampilkan pesan kesalahan jika login gagal
                         setState(() {
                           _massageError = 'salah';

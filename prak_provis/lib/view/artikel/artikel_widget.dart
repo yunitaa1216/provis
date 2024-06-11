@@ -80,36 +80,34 @@ class _ArtikelWidgetState extends State<ArtikelWidget> {
                           onPressed: () {
                             setState(() {
                               _warna1 = (_warna1 == Colors.white)
-                                  ? Color.fromARGB(255, 52, 155, 234)
+                                  ? Color.fromARGB(255, 26, 139, 220)
                                   : Colors.white;
                               _textColor1 = (_textColor1 == Colors.black)
                                   ? Colors.white
                                   : Colors.black;
-                            });
+                    });
                           },
                           child: Text('Kesehatan Mental',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
+                                  TextStyle(color: _textColor1, fontSize: 14)),
+                          style: ElevatedButton.styleFrom(backgroundColor: _warna1),
                         ),
                         SizedBox(width: 10.0),
                         ElevatedButton(
                           onPressed: () {
                             setState(() {
                               _warna2 = (_warna2 == Colors.white)
-                                  ? Color.fromARGB(255, 52, 155, 234)
+                          ? Color.fromARGB(255, 26, 139, 220)
                                   : Colors.white;
                               _textColor2 = (_textColor2 == Colors.black)
                                   ? Colors.white
                                   : Colors.black;
-                            });
+                    });
                           },
                           child: Text('Jantung',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
+                                  TextStyle(color: _textColor2, fontSize: 14)),
+                          style: ElevatedButton.styleFrom(backgroundColor: _warna2),
                         ),
                         SizedBox(width: 10.0),
                         ElevatedButton(
@@ -124,11 +122,9 @@ class _ArtikelWidgetState extends State<ArtikelWidget> {
                             });
                           },
                           child: Text('Karier',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
-                        ),
+                              style: TextStyle(color: _textColor3, fontSize: 14)),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna3),
+                ),
                         SizedBox(width: 10.0),
                         ElevatedButton(
                           onPressed: () {
@@ -138,15 +134,14 @@ class _ArtikelWidgetState extends State<ArtikelWidget> {
                                   : Colors.white;
                               _textColor4 = (_textColor4 == Colors.black)
                                   ? Colors.white
-                                  : Colors.blue;
+                                  : Colors.black;
                             });
                           },
                           child: Text('Seni & Kreatifitas',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
-                        ),
+                                  TextStyle(color: _textColor4, fontSize: 14)),
+                          style: ElevatedButton.styleFrom(backgroundColor: _warna4),
+                ),
                         SizedBox(width: 10.0),
                         ElevatedButton(
                           onPressed: () {
@@ -161,9 +156,8 @@ class _ArtikelWidgetState extends State<ArtikelWidget> {
                           },
                           child: Text('Gaya Hidup',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
+                                  TextStyle(color: _textColor5, fontSize: 14)),
+                          style: ElevatedButton.styleFrom(backgroundColor: _warna5),
                         ),
                         SizedBox(width: 10.0),
                         ElevatedButton(
@@ -179,9 +173,9 @@ class _ArtikelWidgetState extends State<ArtikelWidget> {
                           },
                           child: Text('Mental Health',
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 14)),
+                                  TextStyle(color: _textColor6, fontSize: 14)),
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xFF3C96E9)),
+                              backgroundColor: _warna6),
                         ),
                       ],
                     ),

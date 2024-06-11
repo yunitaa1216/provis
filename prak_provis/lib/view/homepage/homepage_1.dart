@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/homepage/artikel_homepage.dart';
 import 'package:prak_provis/view/homepage/homepage_2.dart';
 import 'package:prak_provis/view/homepage/homepageutama.dart';
+import 'package:prak_provis/viewmodel/api_profil/profil_viewmodel.dart';
 
 import '../widgets/bottom_navigation_bar.dart';
 
@@ -16,6 +18,34 @@ class HomepageSection extends StatefulWidget {
 }
 
 class _HomepageSectionState extends State<HomepageSection> {
+  // final ApiProfil _apiProfil = ApiProfil();
+  // Map<String, dynamic> _userProfile = {};
+  // // bool _isLoading = true; // Tambahkan indikator loading
+  // // String _errorMessage = ''; // Tambahkan pesan error
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _fetchUserProfile();
+  //   // fetchData();
+  // }
+
+  // Future<void> _fetchUserProfile() async {
+  //   try {
+  //     final response = await _apiProfil.getUserProfile();
+  //     setState(() {
+  //       _userProfile = response['data'];
+  //       // _isLoading = false;
+  //     });
+  //   } catch (error) {
+  //     setState(() {
+  //       // _isLoading = false; // Matikan indikator loading meskipun terjadi kesalahan
+  //       // _errorMessage = 'Error fetching user profile: $error';
+  //       print('Error fetching user profile: $error');
+  //       });
+  //   }
+  // }
+
   String getGreeting() {
     var currentTime = DateTime.now();
     var formattedTime = DateFormat.H().format(currentTime);
@@ -37,7 +67,7 @@ class _HomepageSectionState extends State<HomepageSection> {
       appBar: AppBar(
         backgroundColor: Color(0xFFBEDCF2), // Warna AppBar
         automaticallyImplyLeading: false,
-        toolbarHeight: 100,
+        toolbarHeight: 75,
         title: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -49,12 +79,13 @@ class _HomepageSectionState extends State<HomepageSection> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10,),
+                SizedBox(height: 20,),
                 Text(
                   getGreeting(),
                   style: const TextStyle(
-                    color: Color(0xFF636363),
-                    fontSize: 16,
+                    color: Colors.black,
+                    // color: Color(0xFF636363),
+                    fontSize: 18,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'Raleway',
                     height: 0,
@@ -62,11 +93,11 @@ class _HomepageSectionState extends State<HomepageSection> {
                 ),
                 SizedBox(height: 15,),
                 Text(
-                  'Reski',
+                  ' ${AuthService.email}',
                   style: TextStyle(
                     color: Color(
                         0xFF0B0B0B), // Ubah warna sesuai kebutuhan Anda
-                    fontSize: 16,
+                    fontSize: 15,
                     fontWeight: FontWeight.w700,
                     fontFamily: 'Raleway',
                     height: 0,
@@ -75,13 +106,13 @@ class _HomepageSectionState extends State<HomepageSection> {
               ],
             ),
             const SizedBox(
-              width: 175,
+              width: 180,
             ),
             IconButton(
               icon: const Icon(
                 Icons.notifications_none_outlined,
                 color: Color(0xFF0B0B0B),
-                size: 29,
+                size: 26,
               ),
               onPressed: () {
                 Navigator.pushNamed(context, '/notifikasi');

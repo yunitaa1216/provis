@@ -1,21 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/widgets/bottom_navigation_bar.dart';
 
 class MedicalRecordApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> bookingData = AuthService.getBookingData();
+    String? date = bookingData['date'];
+
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
+            color: Colors.black,
             onPressed: () {
               Navigator.pop(context); // Kembali ke halaman sebelumnya
             },
           ),
-          title: Text('Rekam Medis'),
+          title: Text('Rekam Medis', 
+          style: TextStyle(
+            color: Colors.black
+          ),),
           backgroundColor: Color(0xFFBEDCF2),
         ),
         body: Padding(
@@ -61,7 +70,7 @@ class MedicalRecordApp extends StatelessWidget {
                               ),
                               SizedBox(width: 10.0),
                               Text(
-                                'Reski Dwi',
+                                '${AuthService.email}',
                                 style: TextStyle(
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,
@@ -79,7 +88,7 @@ class MedicalRecordApp extends StatelessWidget {
                               ),
                               SizedBox(width: 10.0),
                               Text(
-                                '22 April 2024',
+                                (date ?? 'Tanggal tidak tersedia'),
                                 style: TextStyle(
                                   fontSize: 13.0,
                                   fontWeight: FontWeight.bold,

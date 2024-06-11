@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 
 import '../widgets/bottom_navigation_bar.dart';
 // import 'package:women_center_mobile/View/widgets/bottom_navigation_bar.dart';
@@ -15,13 +16,13 @@ class _HomepageNotifikasi3State extends State<HomepageNotifikasi3> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFFFDCEDF),
+        backgroundColor: Color(0xFFBEDCF2),
         toolbarHeight: 96,
         title: Center(
           child: Transform.translate(
             offset: Offset(0.0, 10.0), // Adjust the value to move the text down
             child: Text(
-              'Artikel',
+              'Notifikasi',
               style: GoogleFonts.roboto(
                 // Use the Google Fonts class
                 fontSize: 16,
@@ -34,61 +35,46 @@ class _HomepageNotifikasi3State extends State<HomepageNotifikasi3> {
       body: ListView(
         padding: EdgeInsets.zero,
         children: [
-          _dateHeader('18 Oktober 2023'),
+          _dateHeader('9 Juni 2024'),
           _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
+            _itemNotifikasi('${AuthService.email}', 'ini adalah pengingat untuk janji temu medis Anda besok pukul 09:00. Harap pastikan Anda hadir tepat waktu. Terima kasih.'),
+            Color(0xFFD8F0FA),
           ),
-          _dateHeader('17 Oktober 2023'),
+          _dateHeader('8 Juni 2024'),
           _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
+            _itemNotifikasi('${AuthService.email}', 'ingat untuk minum obat Anda hari ini. Waktu minum obat adalah pukul 08:00. Jangan lupa untuk meminumnya sesuai petunjuk dokter.'),
+            Color(0xFFD8F0FA),
           ),
-          _dateHeader('16 Oktober 2023'),
+          _dateHeader('7 Juni 2024'),
           _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
+            _itemNotifikasi('${AuthService.email}', 'ingat untuk minum obat Anda hari ini. Waktu minum obat adalah pukul 08:00. Jangan lupa untuk meminumnya sesuai petunjuk dokter.'),
+            Color(0xFFD8F0FA),
           ),
-          _dateHeader('15 Oktober 2023'),
+          _dateHeader('6 Juni 2024'),
           _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
+            _itemNotifikasi('${AuthService.email}', 'ingat untuk minum obat Anda hari ini. Waktu minum obat adalah pukul 08:00. Jangan lupa untuk meminumnya sesuai petunjuk dokter.'),
+            Color(0xFFD8F0FA),
           ),
-          _dateHeader('14 Oktober 2023'),
+          _dateHeader('5 Juni 2024'),
           _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
-          ),
-          _dateHeader('13 Oktober 2023'),
-          _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
-          ),
-          _dateHeader('12 Oktober 2023'),
-          _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
-          ),
-          _dateHeader('11 Oktober 2023'),
-          _coloredCard(
-            _itemNotifikasi('Salma Santoso', 'memposting artikel baru'),
-            Color(0xFFF8E8EE),
+            _itemNotifikasi('${AuthService.email}', 'ingat untuk minum obat Anda hari ini. Waktu minum obat adalah pukul 08:00. Jangan lupa untuk meminumnya sesuai petunjuk dokter.'),
+            Color(0xFFD8F0FA),
           ),
         ],
       ),
-      bottomNavigationBar: MyBottomNavigationBar(
-        selectedIndex: _selectedIndex,
-        onItemTapped: (index) {
-          setState(() {
-            _selectedIndex = index;
-            // if (_selectedIndex == 0) {
-            //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
-            // } else if (_selectedIndex == 1) {
-            //   Navigator.push(context, MaterialPageRoute(builder: (context) => ArtikelScreen()));
-            // }
-          });
-        },
-      ),
+      // bottomNavigationBar: MyBottomNavigationBar(
+      //   selectedIndex: _selectedIndex,
+      //   onItemTapped: (index) {
+      //     setState(() {
+      //       _selectedIndex = index;
+      //       // if (_selectedIndex == 0) {
+      //       //   Navigator.push(context, MaterialPageRoute(builder: (context) => HomeScreen()));
+      //       // } else if (_selectedIndex == 1) {
+      //       //   Navigator.push(context, MaterialPageRoute(builder: (context) => ArtikelScreen()));
+      //       // }
+      //     });
+      //   },
+      // ),
     );
   }
 

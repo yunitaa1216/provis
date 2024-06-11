@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/viewmodel/api_listdokter/list_dokter.dart';
+import 'package:provider/provider.dart';
+import 'package:prak_provis/model/dokter_model/dokter_model.dart';
 
 class PilihanDokter extends StatelessWidget {
   final int idPaket;
@@ -7,60 +10,60 @@ class PilihanDokter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: konselorList.length,
-      itemBuilder: (context, index) {
-        final konselor = konselorList[index];
-        return CardData(konselor: konselor, idPaket: idPaket);
-      },
+    return ChangeNotifierProvider(
+      create: (context) => DoctorProvider()..fetchDoctors(),
+      child: Consumer<DoctorProvider>(
+        builder: (context, doctorProvider, child) {
+          if (doctorProvider.isLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (doctorProvider.doctors.isEmpty) {
+            return Center(child: Text('No doctors found'));
+          } else {
+            return ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: doctorProvider.doctors.length,
+              itemBuilder: (context, index) {
+                final doctor = doctorProvider.doctors[index];
+                return CardData(doctor: doctor, idPaket: idPaket, index: index);
+              },
+            );
+          }
+        },
+      ),
     );
   }
 }
 
-final List<Map<String, dynamic>> konselorList = [
-  {
-    'name': 'dr. Stenafie Russel',
-    'university': 'Spesialis Jantung',
-    'profilePicture': 'assets/images/dokterr1.png',
-    'tentangdokter': 'dr. Stefanie Russel merupakan seorang dokter lulusan Universitas Indonesia yang memiliki keahlian khusus dalam mendiagnosis dan menangani berbagai penyakit yang berkaitan dengan jantung dan pembuluh darah'
-  },
-  {
-    'name': 'dr. Maryland Winkles',
-    'university': 'Spesialis Jantung',
-    'profilePicture': 'assets/images/dokterr1.png',
-    'tentangdokter': 'dr. Stefanie Russel merupakan seorang dokter lulusan Universitas Indonesia yang memiliki keahlian khusus dalam mendiagnosis dan menangani berbagai penyakit yang berkaitan dengan jantung dan pembuluh darah'
-  },
-  {
-    'name': 'dr. Leatrice Handler',
-    'university': 'Spesialis Jantung',
-    'profilePicture': 'assets/images/dokterr1.png',
-    'tentangdokter': 'dr. Stefanie Russel merupakan seorang dokter lulusan Universitas Indonesia yang memiliki keahlian khusus dalam mendiagnosis dan menangani berbagai penyakit yang berkaitan dengan jantung dan pembuluh darah'
-  },
-  {
-    'name': 'dr. Krishna Barbe',
-    'university': 'Spesialis Jantung',
-    'profilePicture': 'assets/images/dokterr1.png',
-    'tentangdokter': 'dr. Stefanie Russel merupakan seorang dokter lulusan Universitas Indonesia yang memiliki keahlian khusus dalam mendiagnosis dan menangani berbagai penyakit yang berkaitan dengan jantung dan pembuluh darah'
-  },
-  {
-    'name': 'dr. Maryland Winkles',
-    'university': 'Spesialis Umum',
-    'profilePicture': 'assets/images/dokterr1.png',
-    'tentangdokter': 'dr. Stefanie Russel merupakan seorang dokter lulusan Universitas Indonesia yang memiliki keahlian khusus dalam mendiagnosis dan menangani berbagai penyakit yang berkaitan dengan jantung dan pembuluh darah'
-  },
-];
-
 class CardData extends StatelessWidget {
-  final Map<String, dynamic> konselor;
+  final Doctor doctor;
   final int idPaket;
+  final int index;
 
   const CardData({
     Key? key,
-    required this.konselor,
+    required this.doctor,
     required this.idPaket,
+    required this.index,
   }) : super(key: key);
+
+  String _getImagePath(int index) {
+    // Ganti logika ini sesuai dengan jumlah gambar yang Anda miliki
+    List<String> imagePaths = [
+      'assets/images/john.png',
+      'assets/images/sarah.png',
+      'assets/images/alice.png',
+      'assets/images/daniel.png',
+      'assets/images/emily.png',
+      'assets/images/michael.png',
+      'assets/images/jane.png',
+      'assets/images/robert.png',
+      'assets/images/laura.png',
+      'assets/images/david.png',
+    ];
+
+    return imagePaths[index % imagePaths.length]; // Untuk menghindari out of range
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,52 +73,91 @@ class CardData extends StatelessWidget {
           context,
           '/booking',
           arguments: {
-            'konselor': konselor,
+            'konselor': doctor,
             'idPaket': idPaket,
           },
         );
       },
       child: SizedBox(
-        height: 160,
+        height: 180, // Increase height to accommodate the button
         child: Card(
+          elevation: 4, // Add elevation for shadow
           margin: const EdgeInsets.all(8.0),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  height: 110,
-                  width: 110,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: Image.asset(
-                      konselor['profilePicture'],
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text(
-                        konselor['name'],
-                        style: const TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 110,
+                      width: 110,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Image.asset(
+                          _getImagePath(index),// You can keep the image path static
+                          fit: BoxFit.cover,
+                          width: 110,
+                          height: 110,
                         ),
                       ),
-                      Text(
-                        konselor['university'],
-                        style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text(
+                            doctor.name,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black, // Change text color
+                            ),
+                          ),
+                          Text(
+                            doctor.specialization,
+                            style: const TextStyle(
+                              fontSize: 16,
+                              color: Colors.grey, // Change text color
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 2), // Add spacing between Row and Button
+                Center(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/booking',
+                        arguments: {
+                          'konselor': doctor,
+                          'idPaket': idPaket,
+                        },
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF3C96E9), // Button color
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                    ),
+                    child: const Text(
+                      'Booking',
+                      style: TextStyle(
+                        color: Colors.white, // Text color
+                      ),
+                    ),
                   ),
                 ),
               ],

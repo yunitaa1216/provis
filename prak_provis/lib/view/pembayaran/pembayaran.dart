@@ -1,18 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/booking/pemesanan_sukses.dart';
 import 'package:prak_provis/view/pembayaran/pembayaran_sukses.dart';
-// import 'package:provider/provider.dart';
-// import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:women_center_mobile/Models/metodepembayaran_model/metodepembayaran1_model.dart';
-// import 'package:google_fonts/google_fonts.dart';
-
+import 'package:intl/intl.dart';
 import '../../model/pembayaran_model/pembayaran_model.dart';
 import '../../model/utils/navigation_service.dart';
-// import 'package:women_center_mobile/Models/utils/navigation_service.dart';
-// import 'package:women_center_mobile/ViewModel/api_pembayaran/pembayaran_api.dart';
-
-// import '../../Models/metodepembayaran_model/counseling_payment_model.dart';
-// import '../../ViewModel/konselor_view_model/konselor_view_model.dart';
 
 class MetodePembayaran1 extends StatefulWidget {
   const MetodePembayaran1({super.key});
@@ -67,43 +59,17 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
     ),
   ];
 
-  // late String order_id;
-  // late KonselorViewModel konselorViewModel;
-  // late CounselingSessionModel counselingSessionModel;
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _fetchUserProfile();
-  //    konselorViewModel = Provider.of<KonselorViewModel>(context, listen: false);
-  //    loadOrderId(); // Memanggil metode untuk memuat order_id dari SharedPreferences
-  //    konselorViewModel.fetchCounselingSessionData();
-  // }
-
-  // Future<void> loadOrderId() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final savedOrderId = prefs.getString("order_id");
-  //   if (savedOrderId != null) {
-  //     setState(() {
-  //       order_id = savedOrderId;
-  //     });
-  //   }
-  // }
-
-  // Future<void> _fetchUserProfile() async {
-  //   try {
-  //     final response = await _apiPembayaran.getUserProfile();
-  //     print('Profile Picture URL: ${_userProfile['profile_picture']}');
-  //     setState(() {
-  //       _userProfile = response['data'];
-  //     });
-  //   } catch (error) {
-  //     print('Error fetching user profile: $error');
-  //   }
-  // }
-
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> bookingData = AuthService.getBookingData();
+    String doctorName = AuthService.getDoctorNameById(bookingData['doctorId']);
+    String appointmentDate = bookingData['date'];
+    String appointmentTime = bookingData['time'];
+
+    DateTime dateTime = DateTime.parse(appointmentDate);
+    String dayOfWeek = DateFormat('EEEE', 'id_ID').format(dateTime);
+    String formattedDate = DateFormat('d MMMM yyyy', 'id_ID').format(dateTime);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFBEDCF2),
@@ -111,9 +77,10 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
         leading: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: IconButton(
-            icon: Icon(Icons.arrow_back,
-            color: Colors.black,),
-            onPressed: () {},
+            icon: Icon(Icons.arrow_back, color: Colors.black,),
+            onPressed: () {
+              Navigator.pushNamed(context, '/homepage');
+            },
           ),
         ),
         title: Center(
@@ -122,7 +89,6 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
             child: Text(
               'Metode Pembayaran',
               style: TextStyle(
-                // Use the Google Fonts class
                 color: Colors.black,
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
@@ -148,12 +114,11 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
               Card(
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Colors.white, // Set background color to white
+                    color: Colors.white,
                     border: Border.all(
-                      color: Color(0xFFBEDCF2), // Set border color to pink
+                      color: Color(0xFFBEDCF2),
                     ),
-                    borderRadius:
-                        BorderRadius.circular(8), // Set border radius if needed
+                    borderRadius: BorderRadius.circular(8),
                   ),
                   padding: EdgeInsets.all(16),
                   child: Column(
@@ -172,7 +137,7 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                       SizedBox(height: 8),
                       Row(
                         children: [
-                          Text('50'),
+                          Text('15'),
                         ],
                       ),
                       SizedBox(height: 8),
@@ -190,7 +155,7 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                       Row(
                         children: [
                           Text(
-                            'Yunita Anggeraini',
+                            '${AuthService.email}',
                           ),
                         ],
                       ),
@@ -209,7 +174,7 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                       Row(
                         children: [
                           Text(
-                            'dr. Stenafie Russel',
+                            doctorName,
                           ),
                         ],
                       ),
@@ -227,7 +192,7 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                       Row(
                         children: [
                           Text(
-                            'Senin. 2 Oktober 2023, Jam 09.00',
+                            '$dayOfWeek, $formattedDate, Jam $appointmentTime',
                           ),
                         ],
                       ),
@@ -235,9 +200,7 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Text(
                 'Metode Pembayaran',
                 style: TextStyle(
@@ -245,18 +208,14 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Text(
                 'E-Wallet',
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: 5,
@@ -283,9 +242,6 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                                 padding: EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   paymentMethod.name,
-                                  // style: TextStyle(
-                                  //   fontWeight: FontWeight.bold,
-                                  // ),
                                 ),
                               ),
                             ),
@@ -301,23 +257,19 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                           ],
                         ),
                       ),
-                      Divider(), // Add a divider after each payment method row
+                      Divider(),
                     ],
                   );
                 },
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               Text(
                 'Transfer Virtual Account',
                 style: TextStyle(
                   fontSize: 14,
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: 5,
@@ -344,9 +296,6 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                                 padding: EdgeInsets.symmetric(horizontal: 8),
                                 child: Text(
                                   paymentMethod.name,
-                                  // style: TextStyle(
-                                  //   fontWeight: FontWeight.bold,
-                                  // ),
                                 ),
                               ),
                             ),
@@ -362,13 +311,11 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                           ],
                         ),
                       ),
-                      Divider(), // Add a divider after each payment method row
+                      Divider(),
                     ],
                   );
                 },
               ),
-              // SizedBox(height: 20),
-              // _buildTotalPayment(),
               SizedBox(height: 20),
               _buildCardTotalPayment(),
             ],
@@ -399,7 +346,6 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                     'Total Pembayaran',
                     style: TextStyle(
                       fontSize: 14,
-                      // fontWeight: FontWeight.bold,
                       color: Colors.black,
                     ),
                   ),
@@ -407,9 +353,10 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
                   Text(
                     'Rp200.000',
                     style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                        color: Color(0xFFBEDCF2)),
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blue,
+                    ),
                   ),
                 ],
               ),
@@ -417,31 +364,28 @@ class _MetodePembayaran1State extends State<MetodePembayaran1> {
             Padding(
               padding: EdgeInsets.only(right: 16, bottom: 16),
               child: ElevatedButton(
-                onPressed: () {
-                  // Navigator.push(
-                  //           context,
-                  //           MaterialPageRoute(
-                  //             builder: (context) => MetodePembayaran1(),
-                  //           ));
-                  //     },
-                  Navigator.push(context,MaterialPageRoute(builder: (context) => PemebayaranSukses()
-                  )
+                onPressed: selectedPaymentIndex != null ? () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => PemebayaranSukses(),
+                    ),
                   );
-                },
+                } : null,
                 style: ElevatedButton.styleFrom(
-                  primary: Color(0xFFBEDCF2),
+                  backgroundColor: selectedPaymentIndex != null ? Colors.blue : Colors.grey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(25),
                   ),
-                  minimumSize:
-                      Size(86, 40), // Set the width and height of the button
+                  minimumSize: Size(86, 40),
                 ),
                 child: Text(
                   'Bayar',
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Colors.white,
+                    color: Colors.
+                    white,
                   ),
                 ),
               ),

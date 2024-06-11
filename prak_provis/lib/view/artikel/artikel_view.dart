@@ -26,12 +26,15 @@ class Artikel extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFFBEDCF2),
-        toolbarHeight: 96,
+        toolbarHeight: 68,
         leading: Padding(
           padding: const EdgeInsets.only(top: 30.0),
           child: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed: () {},
+            color: Colors.black,
+            onPressed: () {
+              Navigator.pushNamedAndRemoveUntil(context, '/homepage', (route) => false);
+            },
           ),
         ),
         title: Center(
@@ -43,6 +46,7 @@ class Artikel extends StatelessWidget {
                 // Use the Google Fonts class
                 fontSize: 16,
                 fontWeight: FontWeight.w600,
+                color: Colors.black
               ),
             ),
           ),
@@ -64,7 +68,7 @@ class Artikel extends StatelessWidget {
           if (index == 0) {
       Navigator.pushNamed(context, '/homepage');
     } else if (index == 2) {
-      Navigator.pushNamed(context, '/booking');
+      Navigator.pushNamed(context, '/pilihandokter');
     } else if (index == 3) {
       Navigator.pushNamed(context, '/info');
     } else if (index == 4) {

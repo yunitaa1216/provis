@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 
 class Article extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String doctorName = AuthService.getDoctorNameById(1);
+    String spesialisname = AuthService.getDoctorSpecializationById(1);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -16,7 +19,8 @@ class Article extends StatelessWidget {
             Spacer(), // Spacer ini akan menempatkan jarak di antara teks dan tombol
             TextButton(onPressed: (){
               Navigator.pushNamed(context, '/artikel');
-            }, child: Text('Lihat Selengkapnya'),)
+            }, child: Text('Lihat Selengkapnya', style: TextStyle(color: Colors.blue),),
+            )
           ],
         ),
         SizedBox(height: 8.0,), // Memberikan jarak antara teks dan gambar
@@ -68,7 +72,7 @@ class Article extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('dr. Wahyu Nasution',
+                          Text(doctorName,
                               style: TextStyle(
                                 fontSize: 16,
                               )),
@@ -77,7 +81,7 @@ class Article extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Text('Spesialis Neurologi',
+                          Text(spesialisname,
                               style: TextStyle(
                                   fontSize: 14, color: Color(0xFF646464))),
                         ],
@@ -89,16 +93,16 @@ class Article extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               SizedBox(
-                                  width: 136), // Jarak antara bintang dan tek
-                              Container(
-                                height:
-                                    38, // Sesuaikan dengan tinggi garis yang diinginkan
-                                width: 1, // Lebar garis
-                                color: Colors.grey, // Warna garis
-                                margin: EdgeInsets.symmetric(
-                                    horizontal:
-                                        29), // Margin antara garis dan teks
-                              ),
+                                  width: 200), // Jarak antara bintang dan tek
+                              // Container(
+                              //   height:
+                              //       38, // Sesuaikan dengan tinggi garis yang diinginkan
+                              //   width: 1, // Lebar garis
+                              //   color: Colors.grey, // Warna garis
+                              //   margin: EdgeInsets.symmetric(
+                              //       horizontal:
+                              //           29), // Margin antara garis dan teks
+                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -136,18 +140,20 @@ class Article extends StatelessWidget {
                                           fontSize: 15)),
                                 ],
                               ),
-                              Container(
-                                height:
-                                    62, // Sesuaikan dengan tinggi garis yang diinginkan
-                                width: 1, // Lebar garis
-                                color: Colors.grey, // Warna garis
-                                margin: EdgeInsets.only(
-                                    left: 87,
-                                    right: 31), // Margin antara garis dan teks
-                              ),
+                              // Container(
+                              //   height:
+                              //       62, // Sesuaikan dengan tinggi garis yang diinginkan
+                              //   width: 1, // Lebar garis
+                              //   color: Colors.grey, // Warna garis
+                              //   margin: EdgeInsets.only(
+                              //       left: 87,
+                              //       right: 31), // Margin antara garis dan teks
+                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
+                                  SizedBox(
+                                  width: 120),
                                   Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -169,15 +175,17 @@ class Article extends StatelessWidget {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Container(
-                                height:
-                                    53, // Sesuaikan dengan tinggi garis yang diinginkan
-                                width: 1, // Lebar garis
-                                color: Colors.grey, // Warna garis
-                                margin: EdgeInsets.only(
-                                    left: 165,
-                                    right: 31), // Margin antara garis dan teks
-                              ),
+                              SizedBox(
+                                  width: 200),
+                              // Container(
+                              //   height:
+                              //       53, // Sesuaikan dengan tinggi garis yang diinginkan
+                              //   width: 1, // Lebar garis
+                              //   color: Colors.grey, // Warna garis
+                              //   margin: EdgeInsets.only(
+                              //       left: 165,
+                              //       right: 31), // Margin antara garis dan teks
+                              // ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
@@ -206,7 +214,7 @@ class Article extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                            width: 150,
+                            width: 160,
                             height: 40,
                             child: ElevatedButton(
                               onPressed: () {
@@ -214,7 +222,7 @@ class Article extends StatelessWidget {
                               },
                               child: Text('Booking Sekarang',
                                   style: TextStyle(
-                                      color: Colors.white, fontSize: 14)),
+                                      color: Colors.white, fontSize: 13)),
                               style: ButtonStyle(
                                 shape: MaterialStateProperty.all<
                                     RoundedRectangleBorder>(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 // import 'package:women_center_mobile/View/metode_pembayaran/1.dart';
+import 'package:intl/intl.dart';
 
 class PemebayaranSukses extends StatelessWidget {
   @override
@@ -172,7 +174,7 @@ class _InfoSuksesState extends State<InfoSukses> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                 decoration: ShapeDecoration(
-                  color: Color(0xFFBEDCF2),
+                  color: Color.fromARGB(255, 7, 151, 254),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),
                   ),
@@ -222,19 +224,33 @@ class _TeksInConatinerState extends State<TeksInConatiner> {
     'Waktu',
     'Tanggal',
     'Dokter',
-    'ID Tranksaksi'
+    // 'ID Tranksaksi'
   ];
-  final List<String> secondList = [
-    'Bank Mandiri',
-    '12.50 PM',
-    '9 Oktober 2023',
-    'dr. Stefanie',
-    '90124h12u412424'
-  ];
+  // final List<String> secondList = [
+  //   'Bank Mandiri',
+  //   '12.50 PM',
+  //   '9 Oktober 2023',
+  //   'dr. Stefanie',
+  //   '90124h12u412424'
+  // ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    var bookingData = AuthService.getBookingData();
+
+    // Cek apakah data booking ada sebelum mengaksesnya
+    if (bookingData != null) {
+      final now = DateTime.now();
+      final currentTime = DateFormat('HH:mm').format(now);
+      // Ubah secondList dengan data booking yang diperoleh
+      final List<String> secondList = [
+        'Bank Mandiri',
+        currentTime,
+        // bookingData['time'] ?? '', // Cek apakah time ada sebelum mengaksesnya
+        bookingData['date'] ?? '', // Cek apakah date ada sebelum mengaksesnya
+        AuthService.getDoctorNameById(bookingData['doctorId']) // Cek apakah doctor ada sebelum mengaksesnya
+      ];
+      return Center(
       child: Container(
         width: 375,
         child: Row(
@@ -294,5 +310,9 @@ class _TeksInConatinerState extends State<TeksInConatiner> {
         ),
       ),
     );
+    } else {
+      // Jika data booking tidak ada, tampilkan pesan atau widget placeholder
+      return Text('Data booking tidak tersedia');
+    }
   }
 }

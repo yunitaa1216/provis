@@ -1,28 +1,15 @@
-class KonselorModel {
-  final int id;
+class Doctor {
   final String name;
-  final String description;
-  final String status;
-  final String profilePicture;
-  final String education;
+  final String specialization;
+  // Tambahkan field lain yang diperlukan
 
-  KonselorModel({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.status,
-    required this.profilePicture,
-    required this.education,
-  });
+  Doctor({required this.name, required this.specialization});
 
-  factory KonselorModel.fromJson(Map<String, dynamic> json) {
-    return KonselorModel(
-      id: json["id"],
-      name: json["name"],
-      description: json["description"],
-      status: json["status"],
-      profilePicture: json["profile_picture"],
-      education: json["education"] ?? "Psikologi • Universitas Indonesia",
+  factory Doctor.fromJson(Map<String, dynamic> json) {
+    return Doctor(
+      name: json['name'],
+      specialization: json['specialization'],
+      // Inisialisasi field lain yang diperlukan
     );
   }
 }

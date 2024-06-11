@@ -63,8 +63,8 @@ class _RegisterWidgetState extends State<RegisterWidget> {
                           );
                           if (response.statusCode == 200){
                             viewModel.register();
-                            Navigator.pushNamed(context,'/homepage');
-                          }
+                            Navigator.pushNamed(context,'/login');
+                          } 
                           else {
                             print("Unexpected status code: ${response.statusCode}");
                           }

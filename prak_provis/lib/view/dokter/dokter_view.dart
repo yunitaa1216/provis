@@ -20,10 +20,11 @@ class KonselingSection extends StatelessWidget {
             "Booking",
             style: TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
           ),
         ),
+        iconTheme: IconThemeData(color: Colors.black),
       ),
       body: SingleChildScrollView(
         child: Column(

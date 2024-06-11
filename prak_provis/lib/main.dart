@@ -10,6 +10,7 @@ import 'package:prak_provis/view/homepage/homepage_3.dart';
 import 'package:prak_provis/view/homepage/homepageutama.dart';
 import 'package:prak_provis/view/kalender/kalender.dart';
 import 'package:prak_provis/view/login/login_view.dart';
+import 'package:prak_provis/view/notifikasi/homepage_notifikasi_3.dart';
 import 'package:prak_provis/view/pembayaran/pembayaran.dart';
 import 'package:prak_provis/view/booking/pemesanan_sukses.dart';
 import 'package:prak_provis/view/pembayaran/pembayaran_sukses.dart';
@@ -19,7 +20,10 @@ import 'package:prak_provis/view/profile/profil.dart';
 import 'package:prak_provis/view/profile/tentang_kami.dart';
 import 'package:prak_provis/view/register/register.dart';
 import 'package:prak_provis/view/welcome_screen/welcome_screen.dart';
+import 'package:prak_provis/viewmodel/api_listdokter/list_dokter.dart';
 import 'package:prak_provis/viewmodel/api_login/login_api.dart';
+import 'package:prak_provis/viewmodel/api_profil/api_profil.dart';
+import 'package:prak_provis/viewmodel/api_profil/profil_viewmodel.dart';
 import 'package:prak_provis/viewmodel/api_register/register_api.dart';
 import 'package:provider/provider.dart';
 import 'package:prak_provis/model/dokter_model/dokter_model.dart';
@@ -41,6 +45,9 @@ class MyApp extends StatelessWidget {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => RegisterViewModel()),
+        ChangeNotifierProvider(create: (_) => DoctorProvider()),
+        // ChangeNotifierProvider(create: (_) => UserProfileProvider()),
+        // ChangeNotifierProvider(create: (context) => ProfilViewModel()),
         // ChangeNotifierProvider(create: (context) => LoginViewModel()),
       ],
     child:
@@ -75,7 +82,8 @@ class MyApp extends StatelessWidget {
         '/pemebayaransukses':(context) => PemebayaranSukses(),
         // '/bookingdokter' :(context) => BookingDokter(description: "description", schedule:[1], konselorId: 1, paketId: 1)
         // '/booking':(context) => Booking()
-        '/booking':(context) => BookingForm()
+        '/booking':(context) => BookingForm(),
+        '/notifikasi': (context) => HomepageNotifikasi3()
       },
     ),   
     );

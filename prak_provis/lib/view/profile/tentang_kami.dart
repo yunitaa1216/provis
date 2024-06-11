@@ -4,16 +4,20 @@ class Aboutme extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           centerTitle: true,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
+            color: Colors.black,
             onPressed: () {
               Navigator.pop(context); // Kembali ke halaman sebelumnya
             },
           ),
-          title: Text('Tentang Kami'),
+          title: Text('Tentang Kami', style: TextStyle(
+            color: Colors.black
+          ),),
           backgroundColor: Color(0xFFBEDCF2),
         ),
         body: Padding(

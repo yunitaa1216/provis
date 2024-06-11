@@ -42,6 +42,7 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.2.2
   font_awesome_flutter: ^10.7.0
+  share_it: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -66,6 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/profil/
     # - assets/images/login_register.png
 
   # To add assets to your application, add an assets section, like this:

@@ -342,7 +342,7 @@ class _WidgetHome1State extends State<WidgetHome1> {
                                     Padding(
                                       padding: EdgeInsets.only(left: 1, top: 18, right: 32),
                                       child: Text(
-                                        'PULIH AI',
+                                        'Q & A PULIH',
                                         style: TextStyle(
                                           color: Color(0xFF4B4B4B),
                                           fontSize: 14,

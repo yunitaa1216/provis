@@ -20,8 +20,16 @@ class RegisterViewModel extends ChangeNotifier {
     required String tanggal_lahir,
   }) async {
     try {
+      print("Registering user with data:");
+      print("Nama Lengkap: $nama_lengkap");
+      print("No HP: $no_hp");
+      print("Email: $email");
+      print("Kata Sandi: $kata_sandi");
+      print("Konfirmasi Kata Sandi: $konfirmasi_kata_sandi");
+      print("Tanggal Lahir: $tanggal_lahir");
+      
       Response response = await Dio().post(
-        'http://localhost:8000/register',
+        'http://localhost:3000/register',
         data: {
           "nama_lengkap": nama_lengkap,
           "email": email,

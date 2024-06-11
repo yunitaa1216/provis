@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:prak_provis/model/utils/auth_service.dart';
 import 'package:prak_provis/view/pembayaran/pembayaran.dart';
 // import 'package:women_center_mobile/View/metode_pembayaran/1.dart';
 
@@ -233,77 +234,86 @@ class _TeksInConatinerState extends State<TeksInConatiner> {
     'Waktu',
     'Tanggal',
     'Dokter',
-    'ID tranksaksi'
-  ];
-  final List<String> secondList = [
-    '50',
-    '09:00 WIB',
-    '10 Oktober 2023',
-    'dr. Stefanie',
-    '90124h12u412424'
+    // 'ID tranksaksi'
   ];
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 375,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              width: 150,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: firstList.map((item) {
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 25),
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        color: Color(0xFF636363),
-                        fontSize: 12,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w500,
-                        height: 0,
+    // Dapatkan data booking dari AuthService
+    var bookingData = AuthService.getBookingData();
+
+    // Cek apakah data booking ada sebelum mengaksesnya
+    if (bookingData != null) {
+      // Ubah secondList dengan data booking yang diperoleh
+      final List<String> secondList = [
+        '15',
+        bookingData['time'] ?? '', // Cek apakah time ada sebelum mengaksesnya
+        bookingData['date'] ?? '', // Cek apakah date ada sebelum mengaksesnya
+        AuthService.getDoctorNameById(bookingData['doctorId']) // Cek apakah doctor ada sebelum mengaksesnya
+      ];
+
+      return Center(
+        child: Container(
+          width: 375,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Container(
+                width: 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: firstList.map((item) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 25),
+                      child: Text(
+                        item,
+                        style: const TextStyle(
+                          color: Color(0xFF636363),
+                          fontSize: 12,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                          height: 0,
+                        ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
-            ),
-            Container(
-              // alignment: AlignmentDirectional.topEnd,
-              alignment: FractionalOffset.centerRight,
-              width: 150,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: secondList.asMap().entries.map((entry) {
-                  final index = entry.key;
-                  final item = entry.value;
-                  Color textColor = Colors.black;
-                  if (index == 1) {
-                    textColor = Colors.black;
-                  }
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 25),
-                    child: Text(
-                      item,
-                      style: TextStyle(
-                        color: textColor,
-                        fontSize: 12,
-                        fontFamily: 'Raleway',
-                        fontWeight: FontWeight.w500,
-                        height: 0,
+              Container(
+                alignment: FractionalOffset.centerRight,
+                width: 150,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: secondList.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
+                    Color textColor = Colors.black;
+                    if (index == 1) {
+                      textColor = Colors.black;
+                    }
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 25),
+                      child: Text(
+                        item,
+                        style: TextStyle(
+                          color: textColor,
+                          fontSize: 12,
+                          fontFamily: 'Raleway',
+                          fontWeight: FontWeight.w500,
+                          height: 0,
+                        ),
                       ),
-                    ),
-                  );
-                }).toList(),
+                    );
+                  }).toList(),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      // Jika data booking tidak ada, tampilkan pesan atau widget placeholder
+      return Text('Data booking tidak tersedia');
+    }
   }
 }

@@ -406,7 +406,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                   },
                   child: Text('Gigi',
                       style: TextStyle(color: _textColor1, fontSize: 14)),
-                  style: ElevatedButton.styleFrom(primary: _warna1),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna1),
                 ),
                 SizedBox(width: 10.0),
                 ElevatedButton(
@@ -422,7 +422,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                   },
                   child: Text('Radiologi',
                       style: TextStyle(color: _textColor2, fontSize: 14)),
-                  style: ElevatedButton.styleFrom(primary: _warna2),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna2),
                 ),
                 SizedBox(width: 10.0),
                 ElevatedButton(
@@ -438,7 +438,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                   },
                   child: Text('Jantung',
                       style: TextStyle(color: _textColor3, fontSize: 14)),
-                  style: ElevatedButton.styleFrom(primary: _warna3),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna3),
                 ),
                 SizedBox(width: 10.0),
                 ElevatedButton(
@@ -454,7 +454,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                   },
                   child: Text('Mata',
                       style: TextStyle(color: _textColor4, fontSize: 14)),
-                  style: ElevatedButton.styleFrom(primary: _warna4),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna4),
                 ),
                 SizedBox(width: 10.0),
                 ElevatedButton(
@@ -470,7 +470,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                   },
                   child: Text('Poli Umum',
                       style: TextStyle(color: _textColor5, fontSize: 14)),
-                  style: ElevatedButton.styleFrom(primary: _warna5),
+                  style: ElevatedButton.styleFrom(backgroundColor: _warna5),
                 ),
                 // SizedBox(width: 10.0),
                 // ElevatedButton(
@@ -486,7 +486,7 @@ class _DokterWidgetState extends State<DokterWidget> {
                 //   },
                 //   child: Text('Karir',
                 //       style: TextStyle(color: _textColor6, fontSize: 14)),
-                //   style: ElevatedButton.styleFrom(primary: _warna6),
+                //   style: ElevatedButton.styleFrom(backgroundColor: _warna6),
                 // ),
               ],
             ),

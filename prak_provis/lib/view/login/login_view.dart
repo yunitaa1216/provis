@@ -9,16 +9,11 @@ class LoginView extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          ColorFiltered(
-            colorFilter: ColorFilter.mode(
-              Colors.black.withOpacity(0.25),
-              BlendMode.srcOver, // Sesuaikan mode blend yang diinginkan
-            ),
-            child: Image.asset(
-              'assets/images/login_register.png',
-              fit: BoxFit.cover,
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+          Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage('assets/images/login_register.png'),
+                  fit: BoxFit.cover),
             ),
           ),
           SingleChildScrollView(
