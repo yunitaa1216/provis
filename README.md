@@ -1,6 +1,6 @@
 # provis
 <h1>Kelompok 6</h1>
-<h3><Yunita Anggeraini 2317153</h3>
+<h3>Yunita Anggeraini 2317153</h3>
 <h3>Reiski Dwi Ramadhani 2317154</h3>
 <h3>Tiara Iffatunadia 2317414</h3>
 
